@@ -24,9 +24,18 @@
                 <span id="expense">$0.00</span>
             </div>
         </header>
-
+        
         <section>
             <h3>Transactions</h3>
+            <label>
+                <input type="radio" name="filter" value="all" checked /> All
+            </label>
+            <label>
+                <input type="radio" name="filter" value="income" /> Income
+            </label>
+            <label>
+                <input type="radio" name="filter" value="expense" /> Expense
+            </label>
             <ul id="transactionList"></ul>
             <div id="status"></div>
         </section>
@@ -36,7 +45,7 @@
             <form id="transactionForm">
                 <div>
                     <label for="type">
-                        <input type="checkbox" name="type" id="type"/>
+                        <input type="checkbox" name="type" id="type" />
                         <div class="option">
                             <span>Expense</span>
                             <span>Income</span>
