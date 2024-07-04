@@ -13,8 +13,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const balance = document.getElementById('balance');
     const income = document.getElementById('income');
     const expense = document.getElementById('expense');
+    const filterRadios = document.querySelectorAll('input[name="filter"]');
 
     form.addEventListener('submit', addTransaction);
+
+    filterRadios.forEach(radio => {
+        radio.addEventListener('change', renderList);
+    });
 
     function updateTotal() {
         const incomeTotal = transactions.filter((trx) => trx.type === "income")
@@ -39,7 +44,15 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        transactions.forEach(({ id, name, amount, date, type }) => {
+        const selectedFilter = document.querySelector('input[name="filter"]:checked').value;
+        const filteredTransactions = selectedFilter === 'all' ? transactions : transactions.filter(trx => trx.type === selectedFilter);
+
+        if (filteredTransactions.length === 0) {
+            status.textContent = 'No transactions.';
+            return;
+        }
+
+        filteredTransactions.forEach(({ id, name, amount, date, type }) => {
             const sign = 'income' === type ? 1 : -1;
 
             const li = document.createElement('li');
